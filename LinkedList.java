@@ -74,11 +74,55 @@ public class LinkedList {
         temp.next = newNode;
     }
 
+    public void removeDuplicates() {
+        Node current = head;
+        while (current != null) {
+            Node next = current.next;
+            while (next != null && current.data == next.data) {
+                next = next.next;
+            }
+            current.next = next;
+            if (next == tail && current.data == tail.data) {
+                tail = current;
+                current.next = null;
+            }
+            current = next;
+        }
+    }
+
+    public void reverseList() {
+        Node current = head;
+        Node temp = null;
+        Node prev = null;
+        Node temp_tail = tail;
+        while (current != temp) {
+            temp = current;
+            while (temp != temp_tail) {
+                prev = temp;
+                temp = temp.next;
+            }
+            int swap = temp.data;
+            temp.data = current.data;
+            current.data = swap;
+
+            current = current.next;
+            temp_tail = prev;
+        }
+
+    }
+
     public static void main(String[] args) {
         LinkedList Lnk = new LinkedList();
         Lnk.display();
         Lnk.addnode(10);
         Lnk.addnode(20);
+        Lnk.addnode(30);
+        Lnk.addnode(40);
+        Lnk.reverseList();
+        Lnk.display();
+        Lnk.addnode(50);
+        Lnk.display();
+        Lnk.removeDuplicates();
         Lnk.display();
         Lnk.delete(30);
         Lnk.insertAfter(10, 40);
