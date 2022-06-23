@@ -52,3 +52,5 @@ public class Queue {
         queue.display();
     }
 }
+// using array:TimeComplexity:O(n)
+// usingLinkList:TimeComplexity:O(1)

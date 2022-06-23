@@ -55,3 +55,6 @@ public class Stack {
         stack.display();
     }
 }
+
+// Timecomplexity:O(1)
+// SpaceComplecity:O(1)
