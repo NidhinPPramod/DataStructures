@@ -6,6 +6,9 @@ public class LinkedList {
         Node(int data) {
             this.data = data;
         }
+
+        Node() {
+        }
     }
 
     public Node head = null;
@@ -108,24 +111,118 @@ public class LinkedList {
             current = current.next;
             temp_tail = prev;
         }
+    }
 
+    public Node RotateRight(int k) {
+        // specialcase
+        while (head == null || k == 0 || head.next == null)
+            return head;
+        // length
+        Node current = head;
+        int l = 1;
+        while (current.next != null) {
+            l++;
+            current = current.next;
+        }
+        // creating circular ll
+        current.next = head;
+        k = l - k % l;
+        while (k-- > 0)
+            current = current.next;
+        head = current.next;
+        current.next = null;
+        return head;
+    }
+
+    public Node RotateRght(int k) {
+        for (int i = 0; i < k; i++) {
+            Node temp = head;
+            Node prev = null;
+            while (temp != tail) {
+                prev = temp;
+                temp = temp.next;
+            }
+            tail.next = head;
+            head = tail;
+            tail = prev;
+            tail.next = null;
+        }
+        return head;
+    }
+
+    public Node RotateLeft(int k) {
+        for (int i = 0; i < k; i++) {
+            Node temp = head.next;
+            tail.next = head;
+            head.next = null;
+            tail = head;
+            head = temp;
+        }
+        return head;
+    }
+
+    public void RemoveNth(int k) {
+        Node start = new Node();
+        start.next = head;
+        Node fast, slow;
+        fast = slow = head;
+        for (int i = 1; i <= k; i++) {
+            fast = fast.next;
+            if (fast == null) {
+                head = head.next;
+                return;
+            }
+        }
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
+    }
+
+    public void nextHigh(int key) {
+        Node temp = head;
+        int closest = temp.data;
+        while (temp != null) {
+            if (Math.abs(key - closest) > Math.abs(key - temp.data)) {
+                closest = temp.data;
+            }
+            temp = temp.next;
+        }
+        System.out.println(closest);
+
+    }
+
+    public void fun(Node head) {
+        Node current = head;
+        if (current == null)
+            return;
+        fun(current.next);
+        System.out.println(current.data);
     }
 
     public static void main(String[] args) {
         LinkedList Lnk = new LinkedList();
+        Lnk.addnode(1);
+        Lnk.addnode(2);
+        Lnk.addnode(3);
+        Lnk.addnode(4);
+        // Lnk.fun(Lnk.head);
+        // Lnk.reverseList();
+        // Lnk.display();
+        // Lnk.addnode(50);
+        // Lnk.display();
+        // Lnk.removeDuplicates();
         Lnk.display();
-        Lnk.addnode(10);
-        Lnk.addnode(20);
-        Lnk.addnode(30);
-        Lnk.addnode(40);
-        Lnk.reverseList();
-        Lnk.display();
-        Lnk.addnode(50);
-        Lnk.display();
-        Lnk.removeDuplicates();
-        Lnk.display();
-        Lnk.delete(30);
-        Lnk.insertAfter(10, 40);
-        Lnk.display();
+
+        // Lnk.delete(30);
+        // Lnk.insertAfter(10, 40);
+        // Lnk.nextHigh(32);
+        // Lnk.RotateRght(2);
+        // Lnk.display();
+        // Lnk.RotateRight(1);
+        // Lnk.display();
+        // Lnk.RemoveNth(1);
+        // Lnk.display();
     }
 }

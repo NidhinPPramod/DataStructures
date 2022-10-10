@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class BinarySearchTree {
     class Node {
         int data;
@@ -156,6 +158,23 @@ public class BinarySearchTree {
         return closest;
     }
 
+    public void inOrderIt() {
+        Stack<Node> st = new Stack<>();
+        Node temp = root;
+        while (true) {
+            while (temp != null) {
+                st.push(temp);
+                temp = temp.left;
+            }
+            if (st.isEmpty()) {
+                break;
+            }
+            temp = st.pop();
+            System.out.println(temp.data);
+            temp = temp.right;
+        }
+    }
+
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
         bst.insert(10);
@@ -167,10 +186,11 @@ public class BinarySearchTree {
         System.out.println(bst.contains(3));
         bst.inOrder();
         System.out.println();
-        bst.preOrder();
-        System.out.println();
-        bst.postOrder();
-        System.out.println();
-        System.out.println(bst.findClosest(5));
+        bst.inOrderIt();
+        // bst.preOrder();
+        // System.out.println();
+        // bst.postOrder();
+        // System.out.println();
+        // System.out.println(bst.findClosest(5));
     }
 }

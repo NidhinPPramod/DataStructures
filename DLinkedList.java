@@ -125,17 +125,34 @@ public class DLinkedList {
         return;
     }
 
+    public void removeDuplicates() {
+        Node current = head;
+        while (current != null) {
+            Node next = current.next;
+            while (next != null && current.data == next.data) {
+                next = next.next;
+            }
+            current.next = next;
+            current = next;
+        }
+    }
+
     public static void main(String[] args) {
         DLinkedList Dlnk = new DLinkedList();
-        Dlnk.display();
+        // Dlnk.display();
+        Dlnk.addNode(10);
+        Dlnk.addNode(10);
         Dlnk.addNode(10);
         Dlnk.addNode(20);
-        Dlnk.addNode(30);
+        Dlnk.addNode(20);
         Dlnk.addNode(40);
+        Dlnk.addNode(40);
+        Dlnk.addNode(70);
         // Dlnk.delete(10);
-        Dlnk.insertNext(20, 50);
-        Dlnk.insertBefore(10, 60);
+        // Dlnk.insertNext(20, 50);
+        // Dlnk.insertBefore(10, 60);
+        Dlnk.removeDuplicates();
         Dlnk.display();
-        Dlnk.displayBackward();
+        // Dlnk.displayBackward();
     }
 }
